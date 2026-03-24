@@ -1,0 +1,23 @@
+{
+  "name": "eslint-comparison",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Behavioral equivalence, performance, and security comparison of eslint vs m-eslint",
+  "scripts": {
+    "test:eslint": "ESLINT_IMPL=eslint mocha 'tests/equivalence/**/*.js' --timeout 30000",
+    "test:m-eslint": "ESLINT_IMPL=m-eslint mocha 'tests/equivalence/**/*.js' --timeout 30000",
+    "test:both": "npm run test:eslint && npm run test:m-eslint",
+    "test:security": "mocha 'tests/security/**/*.js' --timeout 30000",
+    "bench": "node tests/performance/bench.js",
+    "report": "node scripts/generate-report.js",
+    "test": "npm run test:both && npm run test:security && npm run bench"
+  },
+  "dependencies": {
+    "eslint": "^10.0.0",
+    "m-eslint": "github:Nolski/m-eslint"
+  },
+  "devDependencies": {
+    "mocha": "^11.0.0",
+    "chai": "^4.0.0"
+  }
+}
