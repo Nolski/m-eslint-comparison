@@ -10,6 +10,7 @@
     "test:security": "mocha 'tests/security/**/*.js' --timeout 30000",
     "bench": "node tests/performance/bench.js",
     "report": "node scripts/generate-report.js",
+    "test:e2e": "node tests/e2e/run-e2e.js",
     "test": "npm run test:both && npm run test:security && npm run bench"
   },
   "dependencies": {

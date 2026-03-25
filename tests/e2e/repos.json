@@ -1,0 +1,8 @@
+[
+  {"repo": "expressjs/express", "ref": "master", "description": "Legacy .eslintrc.yml config"},
+  {"repo": "axios/axios", "ref": "v1.x", "description": "Flat eslint.config.js"},
+  {"repo": "eslint/eslint", "ref": "main", "description": "Flat config, dogfoods itself"},
+  {"repo": "vitejs/vite", "ref": "main", "description": "Flat config, monorepo"},
+  {"repo": "prettier/prettier", "ref": "main", "description": "Flat config, heavy custom rules"},
+  {"repo": "chalk/chalk", "ref": "main", "description": "No eslint config (edge case)"}
+]

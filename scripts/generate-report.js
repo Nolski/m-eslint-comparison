@@ -1,6 +1,7 @@
 "use strict";
 const { execSync } = require("child_process");
 const fs = require("fs");
+const path = require("path");
 
 let report = "# ESLint vs m-eslint Comparison Results\n\n";
 report += `Generated: ${new Date().toISOString()}\n\n`;
@@ -60,6 +61,27 @@ report += "| Cache poisoning via JSON deserialization | MEDIUM | No integrity ch
 
 report += "\nThese findings were identified by security audit of the original ESLint codebase.\n";
 report += "The m-eslint cleanroom implementation addresses CRITICAL and HIGH severity findings.\n";
+
+// E2E real-world repo results
+report += "\n## E2E Real-World Repo Comparison\n\n";
+const e2eResultsPath = path.join(__dirname, "..", "e2e-results.json");
+if (fs.existsSync(e2eResultsPath)) {
+    const e2eResults = JSON.parse(fs.readFileSync(e2eResultsPath, "utf-8"));
+    report += "| Repository | Files | eslint errors | m-eslint errors | Match |\n";
+    report += "|---|---|---|---|---|\n";
+    e2eResults.forEach(r => {
+        if (r.status === "skip") {
+            report += `| ${r.repo} | - | - | - | SKIP: ${r.reason} |\n`;
+        } else {
+            const match = r.matchedFiles === r.totalFiles
+                ? "PASS"
+                : `${r.matchedFiles}/${r.totalFiles}`;
+            report += `| ${r.repo} | ${r.totalFiles} | ${r.eslintErrors} | ${r.mEslintErrors} | ${match} |\n`;
+        }
+    });
+} else {
+    report += "No e2e results found. Run `npm run test:e2e` first.\n";
+}
 
 fs.writeFileSync("RESULTS.md", report);
 console.log("RESULTS.md generated successfully");
