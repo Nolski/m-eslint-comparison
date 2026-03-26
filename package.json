@@ -18,7 +18,7 @@
     "m-eslint": "github:Nolski/m-eslint"
   },
   "devDependencies": {
-    "mocha": "^11.0.0",
-    "chai": "^4.0.0"
+    "chai": "^4.0.0",
+    "mocha": "^11.0.0"
   }
 }
